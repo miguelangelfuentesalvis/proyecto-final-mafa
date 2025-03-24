@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "tw",
+			"problemMatcher": [],
+			"label": "npm: tw",
+			"detail": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css --watch",
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}
