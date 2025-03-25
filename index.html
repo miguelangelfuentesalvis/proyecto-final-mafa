@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,47 +8,57 @@
     <script src="./src/scripts/main.js" defer type="module"></script>
     <title>PF Windbnd Vanilla</title>
 </head>
-<body>
-    <header class="flex p-4">
-        <div class="flex items-start p-1">
-            <svg class="logo">
-                <use xlink:href="./src/images/icons/logo-f7862584.svg#logo"></use>
-            </svg>
-        </div>
-        <nav class="flex items-center h-16 w-full">
-            <div class="flex border border-gray-500 h-10 rounded-lg">
-                <input type="text" class="w-[35%] border-r outline-none" placeholder="Add location">
-                <input type="text" class="w-[35%] border-r outline-none" placeholder="Add guests">
-                <button class="w-[30%] flex-center bg-gray-100 hover:bg-gray-200" id="search-button">
-                  <svg class="size-4 text-[#f08c00]"><use xlink:href="./src/images/icons/search.svg#search"></use></svg>
-                </button>
-              </div>
-          </nav>
+
+<body class="flex flex-col items-center">
+    <header class="p-2">
+        <svg class="logo h-9">
+            <use xlink:href="./src/images/icons/logo-f7862584.svg#logo"></use>
+        </svg>
+        <nav class="flex justify-center items-center">
+            <div class="flex text-center border-gray-100 h-14 rounded-lg">
+                <input type="text" class="w-[40%] border-gray-100 border h-14 text-center outline-none rounded-l-2xl"
+                    placeholder="Add location">
+                <input type="text" class="w-[40%] border-gray-100 border h-14 text-center outline-none"
+                    placeholder="Add guests">
+                <div class="w-[20%] border-gray-100 border h-14 justify-items-center rounded-e-2xl p-4" id="search-button">
+                    <svg class="size-5 font-extrabold text-[#f08c00]">
+                        <use xlink:href="./src/images/icons/search.svg#search"></use>
+                    </svg>
+                </div>
+            </div>
+        </nav>
     </header>
+
     <div class="flex justify-between items-center w-full">
         <h1 class="p-4 font-bold text-2xl">Stays in Finland</h1>
         <h3 class="p-4 text-gray-500"> 12+ stays</h3>
     </div>
- 
-    <main>
-        <ul>
-            <li>
-                <div class="flex justify-between p-4 border-b border-gray-300">
-                    <div class="flex gap-4">
-                        <figure>
-                            <img src="./src/images/prueba.png" alt="Stay 1" class="w-32 h-32 object-cover rounded-lg">
-                        </figure>
-                        <div>
-                            <p>type: "Entire apartment"</p>
-                            <p>beds: 4</p>
-                            <p>rating: 4</p>
-                            <h2 class="font-bold">title: "Stylist apartment in center of the city"</h2>
-                        </div>
-                    </div>
 
+    <main class="p-4">
+        <ul class="gap-4 py-2">
+            <li class="">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80"
+                        alt="" class="object-cover rounded-4xl">
+                </figure>
+                <div class="flex justify-between items-center w-full">
+                    <div>
+                        <p>
+                            <span id="type">Entire apartment.</span>
+                            <span id="beds">4 beds</span>
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center text-center">
+                            <span><svg class="size-5 text-[#f08c00]">
+                                    <use xlink:href="./src/images/icons/star.svg#star"></use>
+                                </svg></span>
+                            <span id="rating">4.4</span>
+                    </div>
                 </div>
+                <h2 id="title" class="font-bold text-gray-800">Stylist apartment in center of the city</h2>
             </li>
         </ul>
     </main>
 </body>
+
 </html>
