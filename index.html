@@ -23,8 +23,8 @@
 
         <!-- Navegador -->
 
-        <nav class="flex justify-center lg:left-0 lg:top-0">
-            <div class="flex text-center border-gray-100 h-14 rounded-lg">
+        <nav id="input-modal" class="flex justify-center lg:left-0 lg:top-0">
+            <div id="open-modal" class="flex text-center border-gray-100 h-14 rounded-lg">
                 <input type="text" class="w-[40%] border-gray-100 border h-14 text-center outline-none rounded-l-2xl"
                     placeholder="Add location">
                 <input type="text" class="w-[40%] border-gray-100 border h-14 text-center outline-none"
@@ -36,23 +36,65 @@
                     </svg>
                 </div>
             </div>
-           <!--  <div id="modal" class="p-4 bg-slate-100 h-screen w-full fixed shadow- md t">
 
+            <!-- Modal -->
+
+            <div id="modal"
+                class="p-4 bg-slate-100 h-screen w-full fixed shadow-md top-0 sm:w-full md:w-full lg:w-full xl:w-full sm:h-120 md:h-120 lg:h-120 xl:h-120 sm:py-9 md:py-9 lg:py-9 xl:py-9">
                 <p class="p-4">Edit your search</p>
 
-                <div id="modal-content" class="flex flex-col h-16 shadow-xs bg-white border-gray-100 rounded-se-2xl rounded-ss-2xl focus-within:border-gray-900 focus-within:rounded-2xl p-4">
-                    <p class="text-sm">LOCATION</p>
-                   <input type="search" class="outline-none w-full h-full"
-                    placeholder="Add location">
-                </div>
+                <label id="cerra-modal" for="menu-toggle"
+                    class="sm:hidden md:hidden lg:hidden text-black text-2xl absolute top-4 right-4 cursor-pointer">
+                    X
+                </label>
 
-                <div id="modal-content2" class="flex flex-col h-16 shadow-xs bg-white border-gray-100  rounded-b-2xl focus-within:border-gray-900 focus-within:rounded-2xl p-4">
-                    <p class="text-sm">GUESTS</p>
-                    <input type="search" class="outline-none w-full h-full"
-                placeholder="Add guests">
-                </div>
+                <div id="contenedor-modal" class="p-6 h-1/2 bg-blue-200 flex flex-col justify-between">
 
-            </div> -->
+                    <div class="sm:flex sm:flex-row md:flex-row lg:flex-row xl:flex-row gap-4">
+                        <div id="modal-content"
+                            class="flex flex-col h-16 shadow-md bg-white border border-gray-100 rounded-se-2xl rounded-ss-2xl focus-within:border-gray-300 p-4 sm:rounded-2xl">
+                            <p class="text-sm">LOCATION</p>
+                            <input id="input-location" type="search" class="outline-none w-full h-full"
+                                placeholder="Add location">
+                            <ul class="h-full bg-gray-300 min-h-30 p-2 hidden" id="ul-location">
+                                <li>Ciudad 1</li>
+                                <li>Ciudad 2</li>
+                                <li>Ciudad 3</li>
+                                <li>Ciudad 4</li>
+                            </ul>
+                        </div>
+
+                        <div id="modal-content2"
+                            class="flex flex-col h-16 shadow-md bg-white border border-gray-100 rounded-b-2xl focus-within:border-gray-300 p-4 sm:rounded-2xl">
+                            <p class="text-sm">GUESTS</p>
+                            <input id="input-guests" name="" type="text" class="outline-none w-full h-full" value="0">
+                            <ul class="h-full bg-gray-300 min-h-10 p-2 hidden" id="buttons-guests">
+                                <span>Adults</span>
+                                <button class="border px-2" value="-">-</button>
+                                <span id="display-adults">0</span>
+                                <button class="border px-2" value="+">+</button>
+                            </ul>
+                            <ul class="h-full bg-gray-300 min-h-10 p-2 hidden" id="buttons-guests-children">
+                                <span>Children</span>
+                                <button class="border px-2" value="-">-</button>
+                                <span id="display-children">0</span>
+                                <button class="border px-2" value="+">+</button>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="w-full flex justify-center sm:justify-end sm:w-64 md:w-64 lg:w-64">
+                        <button
+                            class="bg-[#eb5757] text-white rounded-2xl h-16 w-32 gap-2 flex items-center justify-center">
+                            <svg class="size-5 font-extrabold text-white">
+                                <use xlink:href="./src/images/icons/search.svg#search"></use>
+                            </svg>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -60,7 +102,7 @@
 
     <div class="flex justify-between items-center w-full">
         <h1 class="p-4 font-bold text-2xl">Stays in Finland</h1>
-        <p id="stays" class="p-4 text-gray-500"><span>12+</span> stays</p>
+        <p class="p-4 text-gray-500"><span id="stays">12+</span> stays</p>
     </div>
 
     <!-- Filtros cajas -->
@@ -69,9 +111,9 @@
         <ul id="filters-stays"
             class="gap-6 py-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center overflow-hidden rounded-lg w-full px-4">
             <li class="flex flex-col rounded-lg">
-                <figure>
+                <figure class="w-full h-60">
                     <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80"
-                        alt="" class="object-cover rounded-4xl">
+                        alt="" class="w-full h-full object-cover rounded-4xl">
                 </figure>
                 <div class="flex justify-between items-center w-full text-gray-400 p-2">
                     <div>

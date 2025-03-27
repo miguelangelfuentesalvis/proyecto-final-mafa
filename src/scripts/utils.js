@@ -7,24 +7,25 @@
 export function loadStays(array, elementHTML) {
     elementHTML.innerHTML = "";
     array.forEach(function (item) {
-        const templete = filterStaysByCity( item.photo, item.title, item.rating, item.type, item.beds, );
+        const templete = filterStaysByCity(item.photo, item.title, item.rating, item.type, item.beds);
         elementHTML.innerHTML += templete;
     });
    
 }
 
 export function filterStaysByCity(
-  photo,
-  title,
-  rating,
-  type,
-  beds
-) {
+    photo,
+    title,
+    rating,
+    type,
+    beds
+  ) 
+{
   const templete = `
      <li class="flex flex-col rounded-lg">
-                <figure>
+                <figure class="w-full h-60">
                     <img src="${photo}"
-                        alt="Imagen de habitación" class="object-cover rounded-4xl">
+                        alt="Imagen de habitación" class="w-full h-full bject-cover rounded-4xl">
                 </figure>
                 <div class="flex justify-between items-center w-full text-gray-400 p-2">
                     <div>
