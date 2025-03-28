@@ -5,135 +5,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/styles/output.css">
-    <script src="./src/scripts/main.js" defer type="module"></script>
-    <title>PF Windbnd Vanilla</title>
+    <script defer src="./src/scripts/main.js" type="module"></script>
+    <title>Windbnb</title>
 </head>
 
-<body class="flex flex-col">
-
+<body class="flex flex-col min-h-screen">
     <!-- Header -->
-
-    <header class="p-6 flex flex-col md:flex md:flex-row md:items-center md:justify-between">
-
-        <!-- Logo -->
-
+    <header class="p-6 flex flex-col md:flex-row md:items-center md:justify-between">
         <svg class="logo h-9">
             <use xlink:href="./src/images/icons/logo-f7862584.svg#logo"></use>
         </svg>
 
-        <!-- Navegador -->
-
-        <nav id="input-modal" class="flex justify-center lg:left-0 lg:top-0">
-            <div id="open-modal" class="flex text-center border-gray-100 h-14 rounded-lg">
-                <input type="text" class="w-[40%] border-gray-100 border h-14 text-center outline-none rounded-l-2xl"
-                    placeholder="Add location">
-                <input type="text" class="w-[40%] border-gray-100 border h-14 text-center outline-none"
-                    placeholder="Add guests">
-                <div class="w-[20%] border-gray-100 border h-14 justify-items-center rounded-e-2xl p-4"
-                    id="search-button">
-                    <svg class="size-5 font-extrabold text-[#eb5757]">
+        <nav class="flex justify-center mt-4 md:mt-0">
+            <div id="open-modal" class="flex border border-gray-300 rounded-xl shadow-sm cursor-pointer">
+                <div class="px-4 py-3 border-r">
+                    <p class="text-sm text-gray-400">Add location</p>
+                </div>
+                <div class="px-4 py-3 border-r">
+                    <p class="text-sm text-gray-400">Add guests</p>
+                </div>
+                <div class="px-4 py-3 flex items-center">
+                    <svg class="size-5 text-[#EB5757]">
                         <use xlink:href="./src/images/icons/search.svg#search"></use>
                     </svg>
-                </div>
-            </div>
-
-            <!-- Modal -->
-
-            <div id="modal"
-                class="p-4 bg-slate-100 h-screen w-full fixed shadow-md top-0 sm:w-full md:w-full lg:w-full xl:w-full sm:h-120 md:h-120 lg:h-120 xl:h-120 sm:py-9 md:py-9 lg:py-9 xl:py-9">
-                <p class="p-4">Edit your search</p>
-
-                <label id="cerra-modal" for="menu-toggle"
-                    class="sm:hidden md:hidden lg:hidden text-black text-2xl absolute top-4 right-4 cursor-pointer">
-                    X
-                </label>
-
-                <div id="contenedor-modal" class="p-6 h-1/2 bg-blue-200 flex flex-col justify-between">
-
-                    <div class="sm:flex sm:flex-row md:flex-row lg:flex-row xl:flex-row gap-4">
-                        <div id="modal-content"
-                            class="flex flex-col h-16 shadow-md bg-white border border-gray-100 rounded-se-2xl rounded-ss-2xl focus-within:border-gray-300 p-4 sm:rounded-2xl">
-                            <p class="text-sm">LOCATION</p>
-                            <input id="input-location" type="search" class="outline-none w-full h-full"
-                                placeholder="Add location">
-                            <ul class="h-full bg-gray-300 min-h-30 p-2 hidden" id="ul-location">
-                                <li>Ciudad 1</li>
-                                <li>Ciudad 2</li>
-                                <li>Ciudad 3</li>
-                                <li>Ciudad 4</li>
-                            </ul>
-                        </div>
-
-                        <div id="modal-content2"
-                            class="flex flex-col h-16 shadow-md bg-white border border-gray-100 rounded-b-2xl focus-within:border-gray-300 p-4 sm:rounded-2xl">
-                            <p class="text-sm">GUESTS</p>
-                            <input id="input-guests" name="" type="text" class="outline-none w-full h-full" value="0">
-                            <ul class="h-full bg-gray-300 min-h-10 p-2 hidden" id="buttons-guests">
-                                <span>Adults</span>
-                                <button class="border px-2" value="-">-</button>
-                                <span id="display-adults">0</span>
-                                <button class="border px-2" value="+">+</button>
-                            </ul>
-                            <ul class="h-full bg-gray-300 min-h-10 p-2 hidden" id="buttons-guests-children">
-                                <span>Children</span>
-                                <button class="border px-2" value="-">-</button>
-                                <span id="display-children">0</span>
-                                <button class="border px-2" value="+">+</button>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                    <div class="w-full flex justify-center sm:justify-end sm:w-64 md:w-64 lg:w-64">
-                        <button
-                            class="bg-[#eb5757] text-white rounded-2xl h-16 w-32 gap-2 flex items-center justify-center">
-                            <svg class="size-5 font-extrabold text-white">
-                                <use xlink:href="./src/images/icons/search.svg#search"></use>
-                            </svg>
-                            Search
-                        </button>
-                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- H1 y H3 -->
+    <!-- Modal -->
 
-    <div class="flex justify-between items-center w-full">
-        <h1 class="p-4 font-bold text-2xl">Stays in Finland</h1>
-        <p class="p-4 text-gray-500"><span id="stays">12+</span> stays</p>
-    </div>
+    <div id="modal" class="p-4 bg-white h-[80vh] w-full fixed shadow-md top-0 hidden">
 
-    <!-- Filtros cajas -->
+        <p class="p-4">Edit your search</p>
 
-    <main class="p-2.5">
-        <ul id="filters-stays"
-            class="gap-6 py-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center overflow-hidden rounded-lg w-full px-4">
-            <li class="flex flex-col rounded-lg">
-                <figure class="w-full h-60">
-                    <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80"
-                        alt="" class="w-full h-full object-cover rounded-4xl">
-                </figure>
-                <div class="flex justify-between items-center w-full text-gray-400 p-2">
-                    <div>
-                        <p>
-                            <span id="superhost"
-                                class="border border-gray-950 rounded-2xl px-2.5 py-2 text-sm font-bold text-gray-700">SUPERHOST</span>
-                            <span id="type">Entire apartment.</span>
-                            <span id="beds">4 beds</span>
-                        </p>
+        <label id="cerra-modal"
+            class="text-black text-2xl absolute top-4 right-4 cursor-pointer sm:hidden lg:hidden xl:hidden">X</label>
+        <div id="contenedor-modal" class="p-6 lg:top-0 xl:top-0 flex flex-col sm:flex-row justify-between h-[70vh]">
+
+            <!-- Grupo inputs -->
+
+            <div class="flex flex-col sm:flex-row ">
+
+                <!-- Ubicación -->
+
+                <div class="flex-1 relative">
+                    <div class="flex flex-col h-16 shadow-md bg-white border border-gray-100 rounded-2xl p-4">
+                        <p class="text-sm">LOCATION</p>
+                        <input id="input-location" type="text" class="outline-none" placeholder="Add location">
                     </div>
-                    <div class="flex flex-wrap items-center text-center gap-1.5">
-                        <span><svg class="size-5 text-[#eb5757]">
-                                <use xlink:href="./src/images/icons/star.svg#star"></use>
-                            </svg></span>
-                        <span id="rating">4.4</span>
+
+                    <ul id="ul-location"
+                        class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <li class="p-3 hover:bg-gray-100 cursor-pointer">Helsinki, Finland</li>
+                        <li class="p-3 hover:bg-gray-100 cursor-pointer">Turku, Finland</li>
+                        <li class="p-3 hover:bg-gray-100 cursor-pointer">Vaasa, Finland</li>
+                        <li class="p-3 hover:bg-gray-100 cursor-pointer">Oulu, Finland</li>
+                    </ul>
+                </div>
+
+
+                <!-- Huéspedes -->
+
+                <div class="flex-1 relative">
+
+                    <div class="flex flex-col h-16 shadow-md bg-white border border-gray-100 rounded-2xl p-4">
+                        <p class="text-sm">GUESTS</p>
+                        <input id="input-guests" type="text" class="outline-none" placeholder="Add guests" readonly>
+                    </div>
+
+                    <div class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-4"
+                        id="guests-selector">
+                        <div class="mb-4" id="buttons-guests">
+                            <p class="text-sm font-medium mb-2">Adults</p>
+                            <div class="flex items-center gap-4">
+                                <button
+                                    class="bg-gray-200 border border-gray-500 rounded w-8 h-8 flex items-center justify-center hover:bg-gray-50"
+                                    value="-">-</button>
+                                <span id="display-adults" class="min-w-[20px] text-center font-bold">0</span>
+                                <button
+                                    class="bg-gray-200 border border-gray-500 rounded w-8 h-8 flex items-center justify-center hover:bg-gray-50"
+                                    value="+">+</button>
+                            </div>
+                        </div>
+
+                        <div id="buttons-guests-children">
+                            <p class="text-sm font-medium mb-2">Children</p>
+                            <div class="flex items-center gap-4">
+                                <button
+                                    class="bg-gray-200 border border-gray-500 rounded w-8 h-8 flex items-center justify-center hover:bg-gray-50"
+                                    value="-">-</button>
+                                <span id="display-children" class="min-w-[20px] text-center font-bold">0</span>
+                                <button
+                                    class="bg-gray-200 border border-gray-500 rounded w-8 h-8 flex items-center justify-center hover:bg-gray-50"
+                                    value="+">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <h2 id="title" class="font-bold text-gray-700 p-2">Stylist apartment in center of the city</h2>
-            </li>
+            </div>
 
+
+            <!-- Botón Search -->
+
+            <div class="w-full flex items-center justify-center sm:justify-end sm:items-end mt-4 sm:mt-0 sm:ml-4">
+                <button id="search-btn"
+                    class="bg-[#eb5757] text-white rounded-3xl h-16 w-40 sm:w-32 gap-2 flex items-center justify-center hover:bg-[#e04a4a] transition-colors text-2xl">
+                    <svg class="size-6 font-bold text-white">
+                        <use xlink:href="./src/images/icons/search.svg#search"></use>
+                    </svg>
+                    search
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Contenido con habitaciones -->
+    <main class="flex-1 p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Stays in Finland</h1>
+            <p id="stays-counter" class="text-gray-500"><span>12+</span> stays</p>
+        </div>
+        <ul id="filters-stays" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Las stays se cargarán aquí -->
         </ul>
     </main>
 </body>

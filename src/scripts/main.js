@@ -6,96 +6,105 @@
 import { stays } from "./stays.js";
 import { loadStays } from "./utils.js";
 
-const filterStays = document.querySelector("#filters-stays");
+// Variables globales
+let adults = 0;
+let children = 0;
 
-loadStays(stays, filterStays);
-
-
-
-
-
-
-
-
-/* Cerrar y Abrir Modal */
-
- const openModal = document.querySelector("#open-modal");
+// Selectores
+const openModal = document.querySelector("#open-modal");
 const modal = document.querySelector("#modal");
-const cerraModal = document.querySelector("#cerra-modal")
+const closeModal = document.querySelector("#cerra-modal");
+const searchBtn = document.querySelector("#search-btn");
+const staysList = document.querySelector("#filters-stays");
+const staysCounter = document.querySelector("#stays-counter span");
 
-function toggle() {
-    modal.classList.toggle("hidden");
-}
-
-openModal.addEventListener(`click`, toggle)
-
-modal.addEventListener(`click`, (e) => {
-    if (e.target === cerraModal) {
-        toggle();
-    }
-})  
-
-/* Botones de Busqueda */
-
-const inputGuests = document.querySelector("#input-guests");
-const buttonsGuests = document.querySelector("#buttons-guests");
-const displayAdults = document.querySelector("#display-adults");
-const buttonsGuestsChildren = document.querySelector("#buttons-guests-children");
-const displayChildren = document.querySelector("#display-children");
-
+// Eventos Menú Ubicación
 const inputLocation = document.querySelector("#input-location");
 const ulLocation = document.querySelector("#ul-location");
 
-inputLocation.addEventListener(`click`, () => {
-  ulLocation.classList.toggle(`hidden`);
-});
 
-inputGuests.addEventListener(`click`, () => {
-  buttonsGuests.classList.toggle(`hidden`);
-  buttonsGuestsChildren.classList.toggle(`hidden`);
-});
 
-/* Boton de Location */
+// Eventos Modal
+openModal.addEventListener("click", toggleModal);
+closeModal.addEventListener("click", toggleModal);
 
-ulLocation.addEventListener(`click`, (e) => {
-  const { target } = e;
-  const { tagName } = target;
-  if (tagName === "LI") {
-    inputLocation.value = target.textContent;
-    ulLocation.classList.toggle(`hidden`);
-  }
-});
-
-/* Botones de Adults y Children */
-
-buttonsGuests.addEventListener(`click`, (e) => {
-  const { target } = e;
-  const { tagName } = target;
-  const currentdisplyAdults = parseInt(displayAdults.textContent);
-  const currentInputGuests = parseInt(inputGuests.value);
-  if (tagName === "BUTTON") {
-    if (target.value === "-") {
-      displayAdults.textContent = currentdisplyAdults - 1;
-      inputGuests.value = currentInputGuests - 1;
-    } else if (target.value === "+") {
-      displayAdults.textContent = currentdisplyAdults + 1;
-      inputGuests.value = currentInputGuests + 1;
+// cerrar modal al hacer click fuera de el.
+document.addEventListener("click", (event) => {
+    if (!modal.contains(event.target) && !openModal.contains(event.target)) {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
     }
-  }
-});
-buttonsGuestsChildren.addEventListener(`click`, (e) => {
-  const { target } = e;
-  const { tagName } = target;
-  const currentdisplyAdults = parseInt(displayChildren.textContent);
-  const currentInputGuests = parseInt(inputGuests.value);
-  if (tagName === "BUTTON") {
-    if (target.value === "-") {
-      displayChildren.textContent = currentdisplyAdults - 1;
-      inputGuests.value = currentInputGuests - 1;
-    } else if (target.value === "+") {
-      displayChildren.textContent = currentdisplyAdults + 1;
-      inputGuests.value = currentInputGuests + 1;
-    }
-  }
 });
 
+inputLocation.addEventListener("click", (e) => {
+    e.stopPropagation();
+    ulLocation.classList.toggle("hidden");
+});
+
+ulLocation.addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+        inputLocation.value = e.target.textContent;
+        ulLocation.classList.add("hidden");
+    }
+});
+
+// Eventos Contadores Huéspedes
+const inputGuests = document.querySelector("#input-guests");
+const buttonsGuests = document.querySelector("#buttons-guests");
+const buttonsGuestsChildren = document.querySelector("#buttons-guests-children");
+const displayAdults = document.querySelector("#display-adults");
+const displayChildren = document.querySelector("#display-children");
+
+inputGuests.addEventListener("click", () => {
+    document.querySelector("#guests-selector").classList.toggle("hidden");
+});
+
+document.querySelectorAll("#buttons-guests button").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        adults = Math.max(0, adults + (e.target.value === "+" ? 1 : -1));
+        displayAdults.textContent = adults;
+        updateTotalGuests();
+    });
+});
+
+document.querySelectorAll("#buttons-guests-children button").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        children = Math.max(0, children + (e.target.value === "+" ? 1 : -1));
+        displayChildren.textContent = children;
+        updateTotalGuests();
+    });
+});
+
+// Evento Búsqueda
+searchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    filterStays();
+    toggleModal();
+});
+
+// Funciones
+function toggleModal() {
+    modal.classList.toggle("hidden");
+    document.body.style.overflow = modal.classList.contains("hidden") ? "auto" : "hidden";
+}
+
+function updateTotalGuests() {
+    const total = adults + children;
+    inputGuests.value = total || "0";
+}
+
+function filterStays() {
+    const location = inputLocation.value.split(",")[0].trim().toLowerCase();
+    const guests = parseInt(inputGuests.value) || 0;
+    
+    const filtered = stays.filter(stay => {
+        const locationMatch = !location || stay.city.toLowerCase().includes(location);
+        const guestsMatch = guests === 0 || stay.maxGuests >= guests;
+        return locationMatch && guestsMatch;
+    });
+    
+    loadStays(filtered, staysList, staysCounter);
+}
+
+// Inicialización
+loadStays(stays, staysList, staysCounter);

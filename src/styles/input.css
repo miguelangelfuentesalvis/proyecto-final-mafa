@@ -1,2 +1,31 @@
 @import "tailwindcss";
 
+/* Para los botones cuadrados de guests */
+
+#guests-selector button {
+  transition: all 0.2s;
+}
+
+#guests-selector button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Posicionamiento responsive del botón Search */
+
+@media (min-width: 640px) {
+  #contenedor-modal {
+    flex-direction: row;
+
+    align-items: flex-end;
+  }
+
+  #contenedor-modal > div:first-child {
+    flex: 1;
+  }
+
+  #contenedor-modal > div:last-child {
+    width: auto;
+
+    margin-left: 1rem;
+  }
+}
