@@ -43,3 +43,58 @@ Este comando se encargará de compilar los estilos cada vez que uses clases de T
 Ya tienes todo listo para empezar. Explora los archivos, experimenta con el código y diviértete aprendiendo. 🎉
 
 Si tienes dudas, no dudes en preguntar. ¡Éxito en tu proyecto! 💪
+
+
+
+
+## Mejoras en la Interacción del Modal
+
+1. Persistencia de Valores Seleccionados
+
+Cambios implementados:
+
+Al seleccionar una ubicación en el dropdown:
+
+ulLocation.addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+        inputLocation.value = e.target.textContent;
+        locationButton.textContent = e.target.textContent.split(",")[0];
+        ulLocation.classList.add("hidden");
+    }
+});
+
+Al modificar el número de huéspedes:
+
+function updateTotalGuests() {
+    const total = adults + children;
+    inputGuests.value = total || "0";
+    guestsButton.textContent = total > 0 ? `${total} guests` : "Add guests";
+}
+
+2. Mejoras en la Experiencia de Usuario
+
+Comportamiento actualizado:
+
+Los valores seleccionados ahora se reflejan en los botones del header principal
+El texto de los botones cambia dinámicamente:
+Para ubicación: Muestra la ciudad seleccionada (ej. "Helsinki")
+Para huéspedes: Muestra el total (ej. "2 guests") o "Add guests" si no hay selección
+
+##  Justificación de los Cambios
+
+Estas mejoras fueron implementadas para:
+Proporcionar retroalimentación visual inmediata al usuario
+Mantener consistencia entre los valores seleccionados en el modal y lo que muestra el header
+Mejorar la accesibilidad y usabilidad del componente
+Seguir las mejores prácticas modernas de JavaScript usando querySelector
+
+Impacto en la Interfaz
+
+Antes:
+Los botones del header siempre mostraban "Add location" y "Add guests"
+No había indicación visual de lo seleccionado al cerrar el modal
+
+Ahora:
+Los botones del header reflejan las selecciones actuales
+Los usuarios pueden ver sus selecciones sin necesidad de reabrir el modal
+Estos cambios mejoran significativamente la experiencia del usuario al hacer más intuitivo el proceso de búsqueda.

@@ -36,3 +36,5 @@ export function loadStays(array, elementHTML, counterElement) {
         counterElement.textContent = array.length >= 12 ? "12+" : array.length;
     }
 }
+
+
